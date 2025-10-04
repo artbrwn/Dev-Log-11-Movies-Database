@@ -13,3 +13,9 @@ def search(search):
     response = requests.get(url)
 
     return response.json()
+
+def get_movie(id):
+    url = f"http://www.omdbapi.com/?apikey={API_KEY}&i={id}"
+    response = requests.get(url)
+
+    return response.json()

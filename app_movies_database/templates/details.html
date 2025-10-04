@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table border="1">
+    <tr>
+        <td rowspan="5">
+            <img src="{{result.Poster}}" alt="Póster de la pelícual {{result.Title}}">
+        </td>
+        <td>{{result.Title}}</td>
+    </tr>
+    <tr>
+        <td>Estreno: {{result.Year}}</td>
+    </tr>
+    <tr>
+        <td>Duración: {{result.Runtime}}</td>
+    </tr>
+    <tr>
+        <td>Dirigida por: {{result.Director}}</td>
+    </tr>
+    </tr>
+    <tr>
+        <td>Elenco: {{result.Actors}}</td>
+    </tr>
+    <tr>
+        <td colspan="2">{{result.Plot}}</td>
+    </tr>
+</table>
+
+
+{% endblock %}

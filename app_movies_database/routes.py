@@ -1,6 +1,6 @@
 from app_movies_database import app
 from flask import render_template, request
-from app_movies_database.models import search
+from app_movies_database.models import search, get_movie
 
 @app.route("/hello")
 def hello():
@@ -17,4 +17,10 @@ def load_search():
 
     # Almacenar los resultados de la búsqueda
     result = search(search_query)
+
     return render_template("search_results.html", search_results=result)
+
+@app.route("/details/<imdb_id>")
+def show_details(imdb_id):
+    movie_data = get_movie(imdb_id)
+    return render_template("details.html", result=movie_data)
