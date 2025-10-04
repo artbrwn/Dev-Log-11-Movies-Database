@@ -1,13 +1,15 @@
 import requests
+from config import API_KEY
 
-def search_by_title(search):
+def search(search):
     """
-    Recibe un str de búsqueda, consulta la api de 
+    Recibe un str de búsqueda, consulta la api de omdbapi y devuelve el resultado
     """
-    url = f"http://www.omdbapi.com/?apikey={key}&s={search}"
+    if search.isnumeric():
+        url = f"http://www.omdbapi.com/?apikey={API_KEY}&t={search}"
+    else:
+        url = f"http://www.omdbapi.com/?apikey={API_KEY}&s={search}"
+    
     response = requests.get(url)
 
     return response.json()
-
-def search_by_year(search):
-    pass
