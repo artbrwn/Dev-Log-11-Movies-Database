@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+<table>
+    <tr>
+        <th>Póster</th>
+        <th>Título</th>
+        <th>Año</th>
+    </tr>
+
+    {% for result in search_results.Search %}
+    <tr>
+        <td><a href="/details/{{result.imdbID}}"><img src="{{result.Poster}}" alt="Póster de la película {{result.Title}}"></a></td>
+        <td><a href="/details/{{result.imdbID}}">{{result.Title}}</a></td>
+        <td>{{result.Year}}</td>
+    </tr>
+    {% else %}
+        <td >Sin resultados para la búsqueda.</td>
+    {% endfor %}
+
+</table>
+{% endblock %}
