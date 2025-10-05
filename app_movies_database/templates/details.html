@@ -17,7 +17,6 @@
     <tr>
         <td>Dirigida por: {{result.Director}}</td>
     </tr>
-    </tr>
     <tr>
         <td>Elenco: {{result.Actors}}</td>
     </tr>
@@ -26,5 +25,33 @@
     </tr>
 </table>
 
+<form action="/details/{{result.imdbID}}" method="POST">
+    <label for="user_name" class="visually-hidden">Tu nombre:</label>
+    <input type="text" name="user_name" id="user_name" placeholder="Escribe tu nombre.">
+    <label for="comment" class="visually-hidden">Comentario:</label>
+    <input type="text" name="comment" id="comment" placeholder="Escribe tu comentario.">
+    <input type="submit" name="submit" id="submit" value="Publicar">
+</form>
+
+<table class="table table-striped">
+    <tr>
+        <th>
+            Usuario
+        </th>
+        <th>
+            Comentario
+        </th>
+        <th>
+            Fecha de publicación
+        </th>
+    </tr>
+    {% for comment in comments %}
+    <tr>
+        <td>{{comment.persona}}</td>
+        <td>{{comment.comentario}}</td>
+        <td>{{comment.fecha}}</td>
+    </tr>
+    {% endfor %}
+</table>
 
 {% endblock %}

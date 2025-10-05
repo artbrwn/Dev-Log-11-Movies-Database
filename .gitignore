@@ -228,3 +228,5 @@ pyrightconfig.json
 
 sandbox.py
 config.py
+comments_data.sqlite
+comments_data.sqlite-journal

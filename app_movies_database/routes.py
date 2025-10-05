@@ -1,6 +1,7 @@
 from app_movies_database import app
-from flask import render_template, request
-from app_movies_database.models import search, get_movie
+from flask import render_template, request, redirect
+from app_movies_database.models import search, get_movie, select_comments_by_movie_id, insert_comment
+from datetime import datetime
 
 @app.route("/hello")
 def hello():
@@ -20,7 +21,18 @@ def load_search():
 
     return render_template("search_results.html", search_results=result)
 
-@app.route("/details/<imdb_id>")
+@app.route("/details/<imdb_id>", methods=["GET", "POST"])
 def show_details(imdb_id):
     movie_data = get_movie(imdb_id)
-    return render_template("details.html", result=movie_data)
+    if request.method == "POST":
+        comment_data = request.form
+        insert_comment([
+            imdb_id,
+            comment_data["user_name"],
+            comment_data["comment"],
+            datetime.now()
+        ])
+        return redirect(f"/details/{imdb_id}")
+    else:
+        movie_comments = select_comments_by_movie_id(imdb_id)
+        return render_template("details.html", result=movie_data, comments=movie_comments)

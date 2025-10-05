@@ -8,3 +8,14 @@
   clip: rect(0,0,0,0); 
   border: 0; 
 }
+
+.index-poster{
+  width: 1px;
+  text-align: center;
+}
+
+.index-poster img {
+    width: 100px;
+    height: auto;
+    border-radius: 4px;
+}
