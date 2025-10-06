@@ -51,6 +51,10 @@
         <td>{{comment.comentario}}</td>
         <td>{{comment.fecha}}</td>
     </tr>
+    {% else %}
+    <tr>
+        <td colspan="3">No hay comentarios en esta película.</td>
+    </tr>
     {% endfor %}
 </table>
 

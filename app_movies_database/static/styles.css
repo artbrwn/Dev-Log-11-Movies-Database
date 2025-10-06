@@ -9,13 +9,37 @@
   border: 0; 
 }
 
-.index-poster{
-  width: 1px;
+
+form input {
+  height: 50px;
+  width: 300px;     
+  font-size: 1.1rem;   
+  padding: 0 15px; 
+    
+}
+
+form button {
+  height: 50px;        
+  width: 50px;
+  
+}
+
+.index-poster {
   text-align: center;
+  vertical-align: middle;
+  width: 1px;    
+  white-space: nowrap;
 }
 
 .index-poster img {
-    width: 100px;
-    height: auto;
-    border-radius: 4px;
+  display: block;
+  margin: 0 auto;
+  height: auto;
+  width: auto;
+  max-width: 200px;
+  min-width: 50px;
+}
+
+footer{
+  text-align: center;
 }

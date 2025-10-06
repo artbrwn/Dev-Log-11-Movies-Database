@@ -10,7 +10,11 @@
     <tbody>
         {% for result in search_results.Search %}
         <tr>
-            <td class="index-poster"><a href="/details/{{result.imdbID}}"><img src="{{result.Poster}}" alt="Póster de la película {{result.Title}}"></a></td>
+            <td class="index-poster">
+                <a href="/details/{{result.imdbID}}">
+                    <img src="{{result.Poster}}" alt="Póster de la película {{result.Title}}" class="rounded">
+                </a>
+            </td>
             <td><a href="/details/{{result.imdbID}}">{{result.Title}}</a></td>
             <td>{{result.Year}}</td>
         </tr>
