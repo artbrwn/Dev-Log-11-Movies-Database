@@ -36,3 +36,7 @@ def show_details(imdb_id):
     else:
         movie_comments = select_comments_by_movie_id(imdb_id)
         return render_template("details.html", result=movie_data, comments=movie_comments)
+
+@app.route("/contact")
+def show_contact():
+    return render_template("contact.html")

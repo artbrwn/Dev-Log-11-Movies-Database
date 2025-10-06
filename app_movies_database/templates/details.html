@@ -27,9 +27,9 @@
 
 <form action="/details/{{result.imdbID}}" method="POST">
     <label for="user_name" class="visually-hidden">Tu nombre:</label>
-    <input type="text" name="user_name" id="user_name" placeholder="Escribe tu nombre.">
+    <input type="text" name="user_name" id="user_name" placeholder="Escribe tu nombre." required>
     <label for="comment" class="visually-hidden">Comentario:</label>
-    <input type="text" name="comment" id="comment" placeholder="Escribe tu comentario.">
+    <input type="text" name="comment" id="comment" placeholder="Escribe tu comentario." required>
     <input type="submit" name="submit" id="submit" value="Publicar">
 </form>
 

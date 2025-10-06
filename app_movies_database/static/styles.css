@@ -9,7 +9,6 @@
   border: 0; 
 }
 
-
 form input {
   height: 50px;
   width: 300px;     
@@ -23,6 +22,11 @@ form button {
   width: 50px;
   
 }
+
+.table-rounded {
+			border-radius: .4rem;
+			overflow: hidden;
+		}
 
 .index-poster {
   text-align: center;
@@ -42,4 +46,8 @@ form button {
 
 footer{
   text-align: center;
+}
+
+.card{
+  max-width: 600px;
 }
