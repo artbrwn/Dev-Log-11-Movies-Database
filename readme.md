@@ -18,7 +18,7 @@ data > create.sql
 
 3. Obtener una API key:
 
-Acceder a https://www.omdbapi.com/.(https://www.omdbapi.com/apikey.aspx) y rellenar el formulario para obtener una API key por e-mail.
+Acceder a [omdbapi](https://www.omdbapi.com/apikey.aspx) y rellenar el formulario para obtener una API key por e-mail.
 
 4. Configurar la aplicación:
 
