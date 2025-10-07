@@ -1,61 +1,70 @@
 {% extends "base.html" %}
 
 {% block content %}
-<table border="1">
-    <tr>
-        <td rowspan="5">
-            <img src="{{result.Poster}}" alt="Póster de la pelícual {{result.Title}}">
-        </td>
-        <td>{{result.Title}}</td>
-    </tr>
-    <tr>
-        <td>Estreno: {{result.Year}}</td>
-    </tr>
-    <tr>
-        <td>Duración: {{result.Runtime}}</td>
-    </tr>
-    <tr>
-        <td>Dirigida por: {{result.Director}}</td>
-    </tr>
-    <tr>
-        <td>Elenco: {{result.Actors}}</td>
-    </tr>
-    <tr>
-        <td colspan="2">{{result.Plot}}</td>
-    </tr>
-</table>
+<div class="container my-4">
+    
+    <div class="card m-4 shadow-sm border-0">
+        <div class="row g-0">
+            <div class="col-md-4 text-center p-3">
+                <img src="{{result.Poster}}" alt="Póster de la película {{result.Title}}" class="img-fluid rounded shadow-sm">
+            </div>
+            <div class="col-md-8">
+                <div class="card-body">
+                    <h3 class="card-title">{{result.Title}}</h3>
+                    <p class="card-text m-1"><strong>Estreno:</strong> {{result.Year}}</p>
+                    <p class="card-text m-1"><strong>Duración:</strong> {{result.Runtime}}</p>
+                    <p class="card-text m-1"><strong>Dirigida por:</strong> {{result.Director}}</p>
+                    <p class="card-text m-1"><strong>Elenco:</strong> {{result.Actors}}</p>
+                    <p class="card-text m-3">{{result.Plot}}</p>
+                </div>
+            </div>
+        </div>
+    </div>
 
-<form action="/details/{{result.imdbID}}" method="POST">
-    <label for="user_name" class="visually-hidden">Tu nombre:</label>
-    <input type="text" name="user_name" id="user_name" placeholder="Escribe tu nombre." required>
-    <label for="comment" class="visually-hidden">Comentario:</label>
-    <input type="text" name="comment" id="comment" placeholder="Escribe tu comentario." required>
-    <input type="submit" name="submit" id="submit" value="Publicar">
-</form>
+    <div class="card m-4 border-0 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title mb-3">Deja tu comentario</h5>
+            <form action="/details/{{result.imdbID}}" method="POST" class="row g-3">
+                <div class="col-md-4">
+                    <input type="text" name="user_name" id="user_name" class="form-control" placeholder="Tu nombre" required>
+                </div>
+                <div class="col-md-6">
+                    <textarea name="comment" id="comment" class="form-control" placeholder="Escribe tu comentario" rows="2" required></textarea>
+                </div>
+                <div class="col-md-2">
+                    <button type="submit" class="btn btn-dark w-100">Publicar</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-<table class="table table-striped">
-    <tr>
-        <th>
-            Usuario
-        </th>
-        <th>
-            Comentario
-        </th>
-        <th>
-            Fecha de publicación
-        </th>
-    </tr>
-    {% for comment in comments %}
-    <tr>
-        <td>{{comment.persona}}</td>
-        <td>{{comment.comentario}}</td>
-        <td>{{comment.fecha}}</td>
-    </tr>
-    {% else %}
-    <tr>
-        <td colspan="3">No hay comentarios en esta película.</td>
-    </tr>
-    {% endfor %}
-</table>
+    <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
+        <div class="card-body">
+            <h5 class="card-title px-3 pt-3 mb-3">Comentarios</h5>
+            <table class="table table-striped align-middle">
+                <thead class="table-dark">
+                    <tr>
+                        <th>Usuario</th>
+                        <th>Comentario</th>
+                        <th>Fecha</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for comment in comments %}
+                        <tr>
+                            <td>{{comment.persona}}</td>
+                            <td>{{comment.comentario}}</td>
+                            <td>{{comment.fecha}}</td>
+                        </tr>
+                    {% else %}
+                        <tr>
+                            <td colspan="3" class="text-center text-muted">No hay comentarios en esta película.</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        </div>
 
+    </div>
 {% endblock %}
