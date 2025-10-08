@@ -3,8 +3,12 @@
 {% block content %}
 <div class="container justify-content-center">
     <form action="/results" class="form-control-lg d-flex justify-content-center mt-1">
-        <label for="search" class="visually-hidden">Busca por título o año</label>
-        <input type="text" placeholder="Título o año de la película" id="search" name="search" class="bg-light rounded me-1" required>
+        <label for="text-search" class="visually-hidden">Busca el título de la película</label>
+        <input type="text" placeholder="Título de la película" id="text-search" name="text-search" class="bg-light rounded me-1" required>
+        
+        <label for="year-search" class="visually-hidden">Filtra por año</label>
+        <input type="number" placeholder="Año de la película" id="year-search" name="year-search" class="bg-light rounded me-1">
+
         <button type="submit" class="btn btn-dark p-1" >
             <span class="material-symbols-outlined">search</span>
         </button>

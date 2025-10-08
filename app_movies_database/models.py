@@ -2,18 +2,20 @@ import requests
 from config import API_KEY
 from app_movies_database.connection import Connection
 
-def search(search):
+def search(text_search, year_search):
     """
-    Recibe un str de búsqueda, consulta la api de omdbapi y devuelve el resultado
+    Recibe un str de búsqueda (y opcionalmente un año),
+    consulta la API de OMDb y devuelve el resultado.
     """
-    if search.isnumeric():
-        url = f"http://www.omdbapi.com/?apikey={API_KEY}&t={search}"
-    else:
-        url = f"http://www.omdbapi.com/?apikey={API_KEY}&s={search}"
+
+    url = f"http://www.omdbapi.com/?apikey={API_KEY}&s={text_search}"
+    
+    if year_search:
+        url += f"&y={year_search}"
     
     response = requests.get(url)
-
     return response.json()
+
 
 def get_movie(id):
     url = f"http://www.omdbapi.com/?apikey={API_KEY}&i={id}"
@@ -23,7 +25,9 @@ def get_movie(id):
 
 def select_comments_by_movie_id(movie_id):
     """
-    Recibe un imdb_id y devuelve todos los resultados ordenados por fecha de más recientes a más antiguos.
+    Recibe un imdb_id y devuelve todos los resultados 
+    ordenados por fecha de más recientes a más antiguos
+    como una lista de diccionarios.
     """
     connect = Connection(f'SELECT * FROM comentario WHERE id_pelicula ="{movie_id}" ORDER BY fecha DESC;')
     result = connect.response.fetchall()

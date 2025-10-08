@@ -14,10 +14,11 @@ def index():
 @app.route("/results")
 def load_search():
     # Almacenar los parámetros de búsqueda
-    search_query = request.args.get("search")
+    text_search_query = request.args.get("text-search")
+    year_search_query = request.args.get("year-search", default="")
 
     # Almacenar los resultados de la búsqueda
-    result = search(search_query)
+    result = search(text_search_query, year_search_query)
 
     return render_template("search_results.html", search_results=result)
 
