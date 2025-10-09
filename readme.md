@@ -16,24 +16,22 @@ Acceder a [omdbapi](https://www.omdbapi.com/apikey.aspx) y rellenar el formulari
 
 4. Configurar la aplicación:
 - Crear un archivo `config.py` siguiendo el modelo de `config_template.py`.
-- Rellenar tu `API_KEY` y la ruta de la base de datos (`ORIGIN_DATA`).
+- Rellenar tu `API_KEY`, introducir una contraseña para WTForms `SECRET_KEY`, y la ruta de la base de datos `ORIGIN_DATA`.
 
 ## Ejecución
 
-Ejecutar el comando 
+Ejecutar el siguiente comando y abrir el servidor local:
 
 ```
 flask run
 ```
-
-y abrir el servidor local.
 
 Por defecto se abre en el puerto local 5002 por mejor compatibilidad con MacOS, pero puedes modificarlo en el archivo `.env`.
 
 
 ## Uso básico
 
-- Buscar películas desde la página de inicio por título (en inglés )o año.
+- Buscar películas desde la página de inicio por título (en inglés ) filtrando opcionalmente por año.
 - Hacer clic en una película para ver su detalle.
 - En la página de detalle, dejar un comentario rellenando el formulario.
 - Los comentarios se muestran en la misma página, con fecha y autor.
