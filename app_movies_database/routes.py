@@ -3,6 +3,7 @@ from flask import render_template, request, redirect
 from app_movies_database.models import search, get_movie, select_comments_by_movie_id, insert_comment
 from datetime import datetime
 from app_movies_database.forms import CommentsForm
+from http import HTTPStatus
 
 @app.route("/hello")
 def hello():
@@ -27,6 +28,11 @@ def load_search():
 def show_details(imdb_id):
     # Almacenar información de la película
     movie_data = get_movie(imdb_id)
+
+    # Validar que hay respuesta correcta
+    if movie_data["Response"] == "False":
+        return render_template("404.html", result=movie_data), HTTPStatus.NOT_FOUND
+
     # Almacenar el formulario
     form = CommentsForm()
     # Almacenar los comentarios
