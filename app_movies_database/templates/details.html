@@ -25,18 +25,34 @@
         <div class="card-body">
             <h5 class="card-title mb-3">Deja tu comentario</h5>
             <form action="/details/{{result.imdbID}}" method="POST" class="row g-3">
+                {{ form.hidden_tag() }}
                 <div class="col-md-4">
-                    <input type="text" name="user_name" id="user_name" class="form-control" placeholder="Tu nombre" required>
+                    <input type="text" name="user_name" id="user_name" class="form-control" placeholder="Tu nombre" value="{{form.user_name.data or ''}}">
                 </div>
                 <div class="col-md-6">
-                    <textarea name="comment" id="comment" class="form-control" placeholder="Escribe tu comentario" rows="2" required></textarea>
+                    <textarea name="comment" id="comment" class="form-control" placeholder="Escribe tu comentario" rows="2" required>{{form.comment.data or ''}}</textarea>
                 </div>
                 <div class="col-md-2">
-                    <button type="submit" class="btn btn-dark w-100">Publicar</button>
+                    <button type="submit" class="btn btn-dark w-100" id="save" name="save">Publicar</button>
                 </div>
             </form>
         </div>
     </div>
+
+    {% if form.errors %}
+    <div class="card m-4 border-0 shadow-sm">
+        <div class="card-body">
+            <h5 class="card-title mb-3">Errores</h5>
+            <ul>
+            {% for field, errors in form.errors.items() %}
+                {% for error in errors %}
+                    <li>{{ error }}</li>
+                {% endfor %}
+            {% endfor %}
+            </ul>
+        </div>
+    </div>
+    {% endif %}
 
     <div class="card border-0 shadow-sm rounded-4 overflow-hidden">
         <div class="card-body">
