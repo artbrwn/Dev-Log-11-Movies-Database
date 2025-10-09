@@ -1,6 +1,7 @@
 import requests
 from config import API_KEY
 from app_movies_database.connection import Connection
+from datetime import datetime
 
 def search(text_search, year_search):
     """
@@ -39,7 +40,14 @@ def select_comments_by_movie_id(movie_id):
         comment_data["id_pelicula"] = row[1]
         comment_data["persona"] = row[2]
         comment_data["comentario"] = row[3]
-        comment_data["fecha"] = row[4]
+        
+        try:
+            fecha_original = datetime.fromisoformat(row[4])
+            comment_data["fecha"] = fecha_original.strftime("%d/%m/%y %H:%M")
+
+        except Exception:
+            comment_data["fecha"] = row[4]
+            
         dictionaries_result.append(comment_data)
 
     return dictionaries_result
