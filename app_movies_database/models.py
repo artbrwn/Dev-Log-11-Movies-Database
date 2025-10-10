@@ -2,6 +2,7 @@ import requests
 from config import API_KEY
 from app_movies_database.connection import Connection
 from datetime import datetime
+import sqlite3
 
 def search(text_search, year_search):
     """
@@ -72,5 +73,6 @@ def insert_comment(register_form):
         connect.connection.commit()
         connect.connection.close()
         return "Comentario guardado correctamente"
-    except Exception as e:
+    
+    except sqlite3.Error as e:
         return f"Comentario no guardado: {e}"
