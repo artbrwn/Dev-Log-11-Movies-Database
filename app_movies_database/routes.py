@@ -35,21 +35,23 @@ def show_details(imdb_id):
 
     # Almacenar el formulario
     form = CommentsForm()
-    # Almacenar los comentarios
-    movie_comments = select_comments_by_movie_id(imdb_id)
+
+    message  = None
 
     if request.method == "POST":
         # Si el formulario es válido, guardar el comentario
         if form.validate_on_submit():
-            insert_comment([
+            message = insert_comment([
                 imdb_id,
                 form.user_name.data,
                 form.comment.data,
                 datetime.now()
             ])
-            return redirect(f"/details/{imdb_id}")
+    # Almacenar los comentarios
+    movie_comments = select_comments_by_movie_id(imdb_id)
+
         
-    return render_template("details.html", result=movie_data, comments=movie_comments, form=form)
+    return render_template("details.html", result=movie_data, comments=movie_comments, form=form, feedback_message=message)
 
 @app.route("/contact")
 def show_contact():

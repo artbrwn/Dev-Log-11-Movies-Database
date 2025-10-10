@@ -64,6 +64,13 @@ def select_comments_by_movie_id(movie_id):
     return dictionaries_result
 
 def insert_comment(register_form):
-    connect = Connection("INSERT INTO comentario (id_pelicula, persona, comentario, fecha) VALUES (?, ?, ?, ?)", register_form)
-    connect.connection.commit()
-    connect.connection.close()
+    try:
+        connect = Connection(
+            "INSERT INTO comentario (id_pelicula, persona, comentario, fecha) VALUES (?, ?, ?, ?)",
+            register_form
+        )
+        connect.connection.commit()
+        connect.connection.close()
+        return "Comentario guardado correctamente"
+    except Exception as e:
+        return f"Comentario no guardado: {e}"
