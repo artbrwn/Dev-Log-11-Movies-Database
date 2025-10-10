@@ -26,32 +26,42 @@ def load_search():
 
 @app.route("/details/<imdb_id>", methods=["GET", "POST"])
 def show_details(imdb_id):
-    # Almacenar información de la película
     movie_data = get_movie(imdb_id)
- 
-    # Validar que hay respuesta correcta
+
     if movie_data["Response"] == "False":
         return render_template("404.html", result=movie_data), HTTPStatus.NOT_FOUND
 
-    # Almacenar el formulario
     form = CommentsForm()
 
-    message  = None
+    # Obtenemos comentarios y posible error
+    movie_comments, comments_error = select_comments_by_movie_id(imdb_id)
 
-    if request.method == "POST":
-        # Si el formulario es válido, guardar el comentario
-        if form.validate_on_submit():
-            message = insert_comment([
-                imdb_id,
-                form.user_name.data,
-                form.comment.data,
-                datetime.now()
-            ])
-    # Almacenar los comentarios
-    movie_comments = select_comments_by_movie_id(imdb_id)
+    if request.method == "POST" and form.validate_on_submit():
+        message = insert_comment([
+            imdb_id,
+            form.user_name.data,
+            form.comment.data,
+            datetime.now()
+        ])
+        # Volvemos a obtener comentarios actualizados
+        movie_comments, comments_error = select_comments_by_movie_id(imdb_id)
+        return render_template(
+            "details.html",
+            result=movie_data,
+            comments=movie_comments,
+            form=form,
+            feedback_message=message,
+            comments_error=comments_error
+        )
 
-        
-    return render_template("details.html", result=movie_data, comments=movie_comments, form=form, feedback_message=message)
+    return render_template(
+        "details.html",
+        result=movie_data,
+        comments=movie_comments,
+        form=form,
+        feedback_message=None,
+        comments_error=comments_error
+    )
 
 @app.route("/contact")
 def show_contact():

@@ -26,7 +26,6 @@ def search(text_search, year_search):
     
     return data
 
-
 def get_movie(id):
     url = f"http://www.omdbapi.com/?apikey={API_KEY}&i={id}"
     try:
@@ -38,31 +37,36 @@ def get_movie(id):
 
 def select_comments_by_movie_id(movie_id):
     """
-    Recibe un imdb_id y devuelve todos los resultados 
-    ordenados por fecha de más recientes a más antiguos
-    como una lista de diccionarios.
+    Devuelve los comentarios asociados a una película.
+    Si ocurre un error, devuelve una lista vacía y un mensaje de error.
     """
-    connect = Connection(f'SELECT * FROM comentario WHERE id_pelicula ="{movie_id}" ORDER BY fecha DESC;')
-    result = connect.response.fetchall()
-    connect.response.close()
+    try:
+        connect = Connection(f'SELECT * FROM comentario WHERE id_pelicula = "{movie_id}" ORDER BY fecha DESC;')
+        result = connect.response.fetchall()
+        connect.response.close()
+    except Exception as e:
+        # Devuelve estructura controlada si falla la base de datos
+        return [], f"Error al obtener los comentarios: {e}"
+
     dictionaries_result = []
     for row in result:
-        comment_data = {}
-        comment_data["id"] = row[0]
-        comment_data["id_pelicula"] = row[1]
-        comment_data["persona"] = row[2]
-        comment_data["comentario"] = row[3]
-        
+        comment_data = {
+            "id": row[0],
+            "id_pelicula": row[1],
+            "persona": row[2],
+            "comentario": row[3]
+        }
+
         try:
             fecha_original = datetime.fromisoformat(row[4])
             comment_data["fecha"] = fecha_original.strftime("%d/%m/%y %H:%M")
-
         except Exception:
             comment_data["fecha"] = row[4]
 
         dictionaries_result.append(comment_data)
 
-    return dictionaries_result
+    # Si todo va bien, devolvemos lista y None (sin error)
+    return dictionaries_result, None
 
 def insert_comment(register_form):
     try:

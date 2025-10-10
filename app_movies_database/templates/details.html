@@ -81,6 +81,11 @@
             </table>
         </div>
         </div>
-
+        
+        {% if comments_error %}
+            <div class="alert alert-danger m-4">
+                {{ comments_error }}
+            </div>
+        {% endif %}
     </div>
 {% endblock %}
