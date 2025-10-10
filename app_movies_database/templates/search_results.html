@@ -21,7 +21,7 @@
             <td>{{result.Year}}</td>
         </tr>
         {% else %}
-            <td colspan="3" >Sin resultados para la búsqueda.</td>
+            <td colspan="3" >{{search_results.Error}}</td>
         {% endfor %}
     </tbody>
 </table>

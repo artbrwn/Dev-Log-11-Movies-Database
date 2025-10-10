@@ -13,16 +13,27 @@ def search(text_search, year_search):
     
     if year_search:
         url += f"&y={year_search}"
+    try:
+        response = requests.get(url, timeout=5)
+        data = response.json()
+
+    except (requests.exceptions.RequestException, requests.exceptions.JSONDecodeError) as e:
+        return {"Response": "False", "Error": f"Error al obtener los datos: {e}"}
+
+    if data.get("Response") == "False" and data.get("Error") == "Too many results.":
+        data["Error"] = "Demasiados resultados. Por favor, especifica mejor tu búsqueda."
     
-    response = requests.get(url)
-    return response.json()
+    return data
 
 
 def get_movie(id):
     url = f"http://www.omdbapi.com/?apikey={API_KEY}&i={id}"
-    response = requests.get(url)
-
-    return response.json()
+    try:
+        response = requests.get(url, timeout=5)
+        return response.json()
+    
+    except (requests.exceptions.RequestException, requests.exceptions.JSONDecodeError) as e:
+        return {"Response": "False", "Error": f"Error al obtener los datos: {e}"}
 
 def select_comments_by_movie_id(movie_id):
     """
@@ -47,7 +58,7 @@ def select_comments_by_movie_id(movie_id):
 
         except Exception:
             comment_data["fecha"] = row[4]
-            
+
         dictionaries_result.append(comment_data)
 
     return dictionaries_result
