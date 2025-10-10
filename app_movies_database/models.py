@@ -37,7 +37,7 @@ def get_movie(id):
 
 def select_comments_by_movie_id(movie_id):
     """
-    Devuelve los comentarios asociados a una película.
+    Devuelve los comentarios asociados a una película y None si no hay error.
     Si ocurre un error, devuelve una lista vacía y un mensaje de error.
     """
     try:

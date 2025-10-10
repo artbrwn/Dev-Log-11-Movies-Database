@@ -41,7 +41,7 @@ def show_details(imdb_id):
             imdb_id,
             form.user_name.data,
             form.comment.data,
-            datetime.now()
+            datetime.now().isoformat()
         ])
         # Volvemos a obtener comentarios actualizados
         movie_comments, comments_error = select_comments_by_movie_id(imdb_id)
