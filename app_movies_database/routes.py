@@ -28,7 +28,7 @@ def load_search():
 def show_details(imdb_id):
     # Almacenar información de la película
     movie_data = get_movie(imdb_id)
-
+ 
     # Validar que hay respuesta correcta
     if movie_data["Response"] == "False":
         return render_template("404.html", result=movie_data), HTTPStatus.NOT_FOUND
